@@ -8,7 +8,7 @@ import org.springframework.data.repository.CrudRepository;
 import com.lms.demo.data.model.Order;
 import org.springframework.stereotype.Repository;
 
-public interface OrderRepository extends CrudRepository<Order, Long> {
+public interface OrderRepository extends CrudRepository<Order, String> {
 
     @Modifying
     @Transactional

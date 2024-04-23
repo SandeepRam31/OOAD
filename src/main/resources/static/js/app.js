@@ -17,26 +17,26 @@ app.controller("LoginController", function ($scope, $http) {
 angular.module("Register", ['ui.bootstrap']).controller("UserController",
     function ($scope, $http) {
 
-    console.log("here....is usercontroller.....")
-    $scope.userData = {
-        'email': "",
-        'password': "",
-        "name":"",
-        "dob":""
-    };
-    $scope.addUser = function () {
-        console.log(" I reached here........");
-        $http.post('http://localhost:8080/user/register', $scope.userData).then(function (response) {
-            if (response.status == "200") {
-                $scope.userCreatedSucess = true;
-            } else {
+        console.log("here....is usercontroller.....")
+        $scope.userData = {
+            'email': "",
+            'password': "",
+            "name": "",
+            "dob": ""
+        };
+        $scope.addUser = function () {
+            console.log(" I reached here........");
+            $http.post('http://localhost:8080/user/Register', $scope.userData).then(function (response) {
+                if (response.status == "200") {
+                    $scope.userCreatedSuccess = true;
+                } else {
+                    $scope.displayError = true;
+                }
+            }).catch(function (response) {
                 $scope.displayError = true;
-            }
-        }).catch(function (response) {
-            $scope.displayError = true;
-        });
-    };
-});
+            });
+        };
+    });
 
 angular.module("Search", ['ui.bootstrap']).controller("BookController",
     function ($scope, $http) {
