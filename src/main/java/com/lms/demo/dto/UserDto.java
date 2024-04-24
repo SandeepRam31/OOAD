@@ -13,4 +13,19 @@ public class UserDto {
     private String name;
     private String dob;
 
+    public String getAddress() {
+        return email;
+    }
+
+    public void setAddress(String address) {
+        this.email = address;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

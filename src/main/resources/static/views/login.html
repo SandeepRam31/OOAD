@@ -1,43 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Login</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Login Page</h1>
     <form id="loginForm">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username"><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password"><br><br>
-        <button type="submit">Login</button>
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" /><br /><br />
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" /><br /><br />
+      <button type="submit">Login</button>
     </form>
-    <a href="/Register">Register</a> <!-- Register button -->
+    <a href="/Register">Register</a>
+    <!-- Register button -->
     <script>
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
-            event.preventDefault(); // Prevent default form submission
-            var username = document.getElementById("username").value;
-            var password = document.getElementById("password").value;
-            // Perform login request here using username and password
-            // Example using fetch API:
-            fetch('/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username: username, password: password })
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent default form submission
+          var username = document.getElementById("username").value;
+          var password = document.getElementById("password").value;
+          // Perform login request here using username and password
+          // Example using fetch API:
+          fetch("user/Login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ email: username, password: password }),
+          })
+            .then((response) => {
+              if (response.ok) {
+                window.location.href = "/search"; // Redirect to /search if login is successful
+              } else {
+                alert("Invalid credentials"); // Show alert for invalid credentials
+              }
             })
-            .then(response => {
-                if (response.ok) {
-                    window.location.href = '/search'; // Redirect to /search if login is successful
-                } else {
-                    alert('Invalid credentials'); // Show alert for invalid credentials
-                }
-            })
-            .catch(error => console.error('Error:', error));
+            .catch((error) => console.error("Error:", error));
         });
     </script>
-</body>
+  </body>
 </html>
