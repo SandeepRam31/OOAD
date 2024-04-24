@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+
 
 import java.util.UUID;
 
@@ -34,5 +37,17 @@ public class UserController {
     private User mapUserDtoToUser(UserDto userDto) {
         return new User(UUID.randomUUID().toString(), userDto.getName(), userDto.getDob(), userDto.getEmail(), userDto.getPassword());
 
+    }
+
+
+    @RequestMapping(value = "/Login", method = RequestMethod.POST,
+            produces = "application/json")
+    public ResponseEntity<String> loginUser(@RequestBody UserDto userDto) {
+        User existingUser = userRepository.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
+        if (existingUser != null) {
+            return ResponseEntity.ok("Login successful");
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Invalid credentials");
+        }
     }
 }

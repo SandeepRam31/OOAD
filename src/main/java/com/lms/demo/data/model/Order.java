@@ -39,8 +39,4 @@ public class Order implements Serializable {
   @Column(name = "quantity")
   private int quantity;
 
-
-
- 
-
 }

@@ -1,18 +1,27 @@
 var app = angular.module("MyApp", []);
-app.controller("LoginController", function ($scope, $http) {
 
-    $scope.welcomeMessage = "Hey buddy welcome...";
-    $scope.LongMessage = "You have successfully integrated Angular with java";
-    console.log("Processed Till here");
-    $http.get('http://localhost:8080/api/getData').then(function (response) {
-        if (response.status == "200") {
-            //$scope. = true;
-            $scope.userCreatedSucess = true;
-        } else {
-            $scope.displayError = true;
-        }
-    });
+app.controller("LoginController", function ($scope, $http) {
+    $scope.user = {}; // Object to store username and password
+    
+    $scope.login = function () {
+        $http.post('http://localhost:8080/user/Login', $scope.user) // Corrected endpoint to '/user/Login'
+            .then(function (response) {
+                // Check if user is authenticated
+                if (response.data && response.data.authenticated) {
+                    // Redirect to search page on successful login
+                    window.location.href = '/search';
+                } else {
+                    // Show error message if authentication failed
+                    $scope.errorMessage = "Invalid username or password";
+                }
+            })
+            .catch(function (error) {
+                // Handle error
+                console.error('Error:', error);
+            });
+    };
 });
+
 
 angular.module("Register", ['ui.bootstrap']).controller("UserController",
     function ($scope, $http) {
@@ -320,5 +329,4 @@ angular.module("Search", ['ui.bootstrap']).controller("BookController",
         };
 
     });
-
 
