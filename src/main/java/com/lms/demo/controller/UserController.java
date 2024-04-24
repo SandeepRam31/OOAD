@@ -43,7 +43,7 @@ public class UserController {
     @RequestMapping(value = "/Login", method = RequestMethod.POST,
             produces = "application/json")
     public ResponseEntity<String> loginUser(@RequestBody UserDto userDto) {
-        User existingUser = userRepository.findByEmailAndPassword(userDto.getEmail(), userDto.getPassword());
+        User existingUser = userRepository.findByAddressAndPassword(userDto.getEmail(), userDto.getPassword());
         if (existingUser != null) {
             return ResponseEntity.ok("Login successful");
         } else {
