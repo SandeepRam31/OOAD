@@ -48,8 +48,6 @@ public class BookController {
     public void addBooks(@RequestBody List<Book> books) {
         System.out.println(books);
         bookRepository.saveAll(books);
-
-
     }
 
     @RequestMapping(value = "/delBook", method = RequestMethod.POST, produces = "application/json")
